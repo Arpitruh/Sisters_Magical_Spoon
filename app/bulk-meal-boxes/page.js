@@ -1,4 +1,6 @@
 import Link from "next/link";
+import AnimatedFood from "../../components/AnimatedFood";
+import MealIcon from "../../components/MealIcon";
 import { SITE, wa } from "../../lib/site";
 import { getContent } from "../../lib/content";
 
@@ -12,13 +14,17 @@ export default async function Bulk() {
   const { BOXES } = await getContent();
   return (
     <main>
-      <section className="hero">
+      <section className="hero has-food-motion">
         <span className="eyebrow">For days worth sharing</span>
         <h1>Good gatherings deserve good food.</h1>
         <p>Explore individual meal box options for workdays, celebrations and family occasions. Tell us your needs and we'll discuss the details.</p>
         <div className="row">
           <a className="btn" href={wa("Hi, I would like a quote for meal boxes. Event date: , Quantity: , Delivery area: ")}>Ask for a quote ↗</a>
           <a className="btn ghost" href="#box-options">Browse boxes ↓</a>
+        </div>
+        <div className="bulk-page-motion">
+          <AnimatedFood animation="/animations/meal-box.webp" still="/images/brand/bulk-meal.webp" alt="Illustrated packed Indian meal box" width={220} height={164} loading="eager" />
+          <span>Meal box inspiration · Illustration</span>
         </div>
       </section>
       <section className="sec" id="box-options">
@@ -30,7 +36,7 @@ export default async function Bulk() {
         <div className="grid">
           {BOXES.map((box, i) => (
             <article className="card pricing-card" key={box.name}>
-              <span className="card-icon" aria-hidden="true">{i === 0 ? "🍱" : i === 1 ? "🥘" : "✨"}</span>
+              <span className="card-icon"><MealIcon name={i === 0 ? "bulk-meal" : i === 1 ? "paneer" : "thali"} /></span>
               <h3>{box.name}</h3>
               <p className="price">{box.price}<small> / box</small></p>
               <p>{box.items}</p>

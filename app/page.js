@@ -1,6 +1,8 @@
 import Link from "next/link";
 import AreaCheck from "../components/AreaCheck";
 import MealIllustration from "../components/MealIllustration";
+import AnimatedFood from "../components/AnimatedFood";
+import MealIcon from "../components/MealIcon";
 import { SITE, wa, FAQS, REVIEWS } from "../lib/site";
 import { getContent } from "../lib/content";
 
@@ -33,6 +35,10 @@ export default async function Home() {
           </div>
           <div className="hero-visual" aria-hidden="true">
             <MealIllustration />
+            <div className="hero-motion-card">
+              <AnimatedFood animation="/animations/steaming-tiffin.webp" still="/images/brand/tiffin.webp" alt="Illustrated steaming Indian tiffin" width={135} height={135} loading="eager" />
+              <span>Warm &amp; comforting</span>
+            </div>
             <div className="floating-note top-note"><strong>Ghar ka khana</strong>The familiar kind of comfort</div>
             <div className="floating-note bottom-note"><strong>Made for your day</strong>Lunch, dinner &amp; occasions</div>
           </div>
@@ -41,9 +47,9 @@ export default async function Home() {
 
       <section className="section-shell" aria-label="Explore our service">
         <div className="benefits-grid">
-          <div className="benefit"><div className="benefit-icon" aria-hidden="true">🥣</div><div><h3>Everyday comfort</h3><p>A familiar home-style menu for busy days.</p></div></div>
-          <div className="benefit"><div className="benefit-icon" aria-hidden="true">📅</div><div><h3>Plans for your routine</h3><p>Choose a trial meal, or explore weekly and monthly options.</p></div></div>
-          <div className="benefit"><div className="benefit-icon" aria-hidden="true">🎉</div><div><h3>Group meals, sorted</h3><p>Meal box options for celebrations and team lunches.</p></div></div>
+          <div className="benefit"><div className="benefit-icon"><MealIcon name="thali" /></div><div><h3>Everyday comfort</h3><p>A familiar home-style menu for busy days.</p></div></div>
+          <div className="benefit"><div className="benefit-icon"><MealIcon name="tiffin" /></div><div><h3>Plans for your routine</h3><p>Choose a trial meal, or explore weekly and monthly options.</p></div></div>
+          <div className="benefit"><div className="benefit-icon"><MealIcon name="bulk-meal" /></div><div><h3>Group meals, sorted</h3><p>Meal box options for celebrations and team lunches.</p></div></div>
         </div>
       </section>
 
@@ -51,7 +57,10 @@ export default async function Home() {
         <div className="section-shell">
           <div className="section-topline">
             <div className="section-heading"><span className="kicker">Something delicious every day</span><h2>A week of familiar favourites.</h2><p>Browse the sample weekly tiffin menu before you choose your plan.</p></div>
-            <a className="text-link" href={wa("Hi, can you share the current tiffin menu?")}>Ask about today’s menu ↗</a>
+            <div className="menu-motion-aside">
+              <AnimatedFood animation="/animations/fresh-thali.webp" still="/images/brand/thali.webp" alt="Illustrated home-style Indian thali" width={145} height={82} />
+              <a className="text-link" href={wa("Hi, can you share the current tiffin menu?")}>Ask about today’s menu ↗</a>
+            </div>
           </div>
           <div className="weekly-menu">{MENU.map(([day, meal]) => (
             <div className="weekly-menu-item" key={day}><span className="day-pill">{day}</span><p>{meal}</p></div>
@@ -64,7 +73,7 @@ export default async function Home() {
         <div className="section-heading"><span className="kicker">Find your fit</span><h2>A plan for every appetite.</h2><p>Try a single meal first, or find a plan that fits your everyday routine.</p></div>
         <div className="pricing-grid">{PLANS.map((plan, i) => (
           <article className="card pricing-card" key={plan.name}>
-            <span className="card-icon" aria-hidden="true">{i === 0 ? "🍲" : i === 1 ? "📆" : "🍛"}</span>
+            <span className="card-icon"><MealIcon name={i === 0 ? "dal-rice" : i === 1 ? "khichdi" : "paneer"} /></span>
             <h3>{plan.name}</h3><p className="price">{plan.price}</p><p>{plan.note}</p>
             <a className="btn sm" href={wa("Hi, I'd like to ask about the " + plan.name + " plan")}>Enquire about plan ↗</a>
           </article>
@@ -77,10 +86,13 @@ export default async function Home() {
           <div>
             <div className="section-heading"><span className="kicker">Planning a gathering?</span><h2>Good food. Great company.</h2><p>Explore packed meal boxes for gatherings, celebrations and team lunches.</p></div>
             <ul className="bulk-list"><li>Options for different occasions</li><li>Simple quotes on WhatsApp</li><li>Group-friendly meal box options</li></ul>
-            <Link className="btn" href="/bulk-meal-boxes">Explore bulk meal boxes ↗</Link>
+            <div className="row">
+              <Link className="btn" href="/bulk-meal-boxes">Explore bulk meal boxes ↗</Link>
+              <AnimatedFood animation="/animations/curry-spoon.webp" still="/images/brand/dal-rice.webp" alt="Illustrated spoon serving curry" width={135} height={135} className="bulk-small-motion" />
+            </div>
           </div>
           <div className="box-stack">{BOXES.map(box => (
-            <article className="card" key={box.name}><h3>{box.name}</h3><p className="price">{box.price}<small> / box</small></p><p>{box.items}</p></article>
+            <article className="card" key={box.name}><span className="card-icon"><MealIcon name="bulk-meal" /></span><h3>{box.name}</h3><p className="price">{box.price}<small> / box</small></p><p>{box.items}</p></article>
           ))}</div>
         </div>
       </section>

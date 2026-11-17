@@ -271,3 +271,57 @@ blockquote.card footer { font-weight: 800; color: var(--green); }
 .admin .photos input { display: block; width: calc(100% - 26px); margin: 12px 13px; }
 .admin .photos button { margin: 0 13px; }
 .admin .stick { box-shadow: 0 -9px 20px rgba(31,77,58,.04); }
+
+
+/* Original Sisters Magical Spoon animated illustrations and brand icons */
+.brand-logo-img { width: 44px; height: 44px; object-fit: contain; display: block; }
+.benefit-icon:has(.meal-icon), .card-icon:has(.meal-icon) { background: #fff6d6; }
+.meal-icon { display: block; flex: none; width: 48px; height: 48px; object-fit: contain; }
+.meal-icon[data-size="80"] { width: 80px; height: 80px; }
+.hero-motion-card {
+  position: absolute; right: 0; bottom: 4%; z-index: 3;
+  display: flex; flex-direction: column; align-items: center;
+  border-radius: 21px; padding: 9px 14px 10px;
+  background: #fffdf8; border: 1px solid #e6dfc4;
+  box-shadow: 0 16px 34px rgba(31,77,58,.16);
+  transform: rotate(5deg);
+}
+.hero-motion-card img { display: block; width: 125px; height: 125px; object-fit: cover; border-radius: 13px; }
+.hero-motion-card span { margin-top: 5px; color: #1f4d3a; font-size: .73rem; font-weight: 800; }
+.menu-motion-aside { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.menu-motion-aside img { display: block; width: 152px; height: auto; border-radius: 16px; }
+.bulk-small-motion { width: 112px; height: 112px; border-radius: 15px; object-fit: cover; box-shadow: 0 8px 20px rgba(31,77,58,.08); }
+.has-food-motion { position: relative; min-height: 410px; padding-right: max(350px,calc((100vw - 980px)/2)); }
+.has-food-motion > h1, .has-food-motion > p { max-width: 58ch; }
+.bulk-page-motion {
+  position: absolute; top: 50%; right: max(5%,calc((100vw - 1160px)/2));
+  transform: translateY(-50%) rotate(2deg);
+  display: flex; flex-direction: column; align-items: center; padding: 14px;
+  border-radius: 25px; background: #fffdf8; box-shadow: 0 16px 45px rgba(31,77,58,.15);
+  border: 1px solid #e6dfc4;
+}
+.bulk-page-motion img { display: block; width: min(25vw,260px); height: auto; border-radius: 14px; }
+.bulk-page-motion span { color: #556458; font-size: .76rem; font-weight: 700; padding-top: 7px; }
+.about-mascot-motion img { width: min(22vw,220px); }
+.illustration-icons-gallery { display: grid; grid-template-columns: repeat(7,minmax(0,1fr)); gap: 12px; margin: 12px 0 58px; }
+.illustration-icon-card { display: flex; min-height: 133px; flex-direction: column; align-items: center; justify-content: center; gap: 7px;
+  border: 1px solid #e6dfc4; border-radius: 18px; background: #fff6d6; }
+.illustration-icon-card span { font-size: .8rem; color: #1f4d3a; font-weight: 750; }
+@media (max-width: 900px) {
+  .has-food-motion { padding-right: 32px; }
+  .bulk-page-motion { position: relative; transform: none; top: auto; right: auto; margin-top: 25px; width: max-content; max-width: 100%; }
+  .bulk-page-motion img, .about-mascot-motion img { width: 200px; }
+  .illustration-icons-gallery { grid-template-columns: repeat(4,minmax(0,1fr)); }
+}
+@media (max-width: 640px) {
+  .hero-motion-card { bottom: 1%; right: 0; padding: 7px 9px; transform: rotate(3deg); }
+  .hero-motion-card img { width: 88px; height: 88px; }
+  .hero-motion-card span { font-size: .58rem; }
+  .menu-motion-aside { align-items: flex-start; flex-direction: row; flex-wrap: wrap; }
+  .menu-motion-aside img { width: 135px; }
+  .has-food-motion { padding-right: 20px; min-height: 0; }
+  .illustration-icons-gallery { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 9px; }
+  .illustration-icon-card { min-height: 128px; }
+  .bulk-page-motion { padding: 9px; }
+  .bulk-page-motion img, .about-mascot-motion img { width: 165px; }
+}

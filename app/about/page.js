@@ -1,4 +1,5 @@
 import PhotoGallery from "../../components/PhotoGallery";
+import AnimatedFood from "../../components/AnimatedFood";
 import { SITE } from "../../lib/site";
 
 export const metadata = {
@@ -25,10 +26,14 @@ const PHOTOS = [
 export default function About() {
   return (
     <main>
-      <section className="hero">
+      <section className="hero has-food-motion">
         <span className="eyebrow">The people behind the plate</span>
         <h1>Made with a little extra heart.</h1>
         <p>{SITE.tagline}.</p>
+        <div className="bulk-page-motion about-mascot-motion">
+          <AnimatedFood animation="/animations/spoon-mascot.webp" still="/images/brand/logo-mark.webp" alt="Animated illustrated Magical Spoon mascot" width={135} height={135} loading="eager" />
+          <span>Meet our illustrated mascot</span>
+        </div>
       </section>
       <section className="sec">
         <div className="story-card">
