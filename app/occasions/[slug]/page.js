@@ -7,15 +7,17 @@ export const dynamicParams = false;
 export const generateStaticParams = () => OCCASIONS.map((o) => ({ slug: o.slug }));
 const find = (s) => OCCASIONS.find((o) => o.slug === s);
 
-export function generateMetadata({ params }) {
-  const o = find(params.slug);
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const o = find(slug);
   if (!o) return {};
   return { title: `${o.title} in ${SITE.city}`, description: `${o.text} Order on WhatsApp.`, alternates: { canonical: `/occasions/${o.slug}` } };
 }
 
 export default async function Occasion({ params }) {
   const { BOXES } = await getContent();
-  const o = find(params.slug);
+  const { slug } = await params;
+  const o = find(slug);
   if (!o) notFound();
   return (
     <main>

@@ -7,13 +7,15 @@ export const dynamicParams = false;
 export const generateStaticParams = () => POSTS.map((p) => ({ slug: p.slug }));
 const find = (s) => POSTS.find((p) => p.slug === s);
 
-export function generateMetadata({ params }) {
-  const p = find(params.slug);
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const p = find(slug);
   return p ? { title: p.title, description: p.desc, alternates: { canonical: `/blog/${p.slug}` } } : {};
 }
 
-export default function Post({ params }) {
-  const p = find(params.slug);
+export default async function Post({ params }) {
+  const { slug } = await params;
+  const p = find(slug);
   if (!p) notFound();
   const ld = { "@context": "https://schema.org", "@type": "Article", headline: p.title, description: p.desc, author: { "@type": "Organization", name: SITE.name }, mainEntityOfPage: `${SITE.url}/blog/${p.slug}` };
   return (

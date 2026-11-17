@@ -6,8 +6,9 @@ export const dynamicParams = false;
 export const generateStaticParams = () => SITE.areas.map((a) => ({ slug: a.slug }));
 const find = (slug) => SITE.areas.find((a) => a.slug === slug);
 
-export function generateMetadata({ params }) {
-  const a = find(params.slug);
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const a = find(slug);
   if (!a) return {};
   return {
     title: `Tiffin Service in ${a.name}, ${SITE.city}`,
@@ -18,7 +19,8 @@ export function generateMetadata({ params }) {
 
 export default async function Area({ params }) {
   const { MENU } = await getContent();
-  const a = find(params.slug);
+  const { slug } = await params;
+  const a = find(slug);
   if (!a) notFound();
   return (
     <main>
