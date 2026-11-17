@@ -1,9 +1,10 @@
+import Link from "next/link";
 import { SITE, wa } from "../../lib/site";
 import { getContent } from "../../lib/content";
 
 export const metadata = {
-  title: `Bulk Meal Boxes & Party Lunch Boxes in ${SITE.city}`,
-  description: `Packed lunch boxes for offices, pooja, birthdays and events in ${SITE.city}. 20 to 100+ boxes, delivered ready to eat.`,
+  title: "Bulk Meal Boxes & Party Lunch Boxes in " + SITE.city,
+  description: "Explore meal boxes for offices, parties and gatherings. Enquire about your group menu on WhatsApp.",
   alternates: { canonical: "/bulk-meal-boxes" },
 };
 
@@ -12,25 +13,49 @@ export default async function Bulk() {
   return (
     <main>
       <section className="hero">
-        <h1>Bulk meal boxes for offices, parties and events in {SITE.city}</h1>
-        <p>Individually packed, delivered ready to eat. No setup, no serving staff.</p>
-        <a className="btn" href={wa("Hi, I need a quote for bulk meal boxes. Date: , Boxes: , Area: ")}>Get a quote on WhatsApp</a>
-      </section>
-      <section className="sec">
-        <h2>Box options</h2>
-        <div className="grid">
-          {BOXES.map((b) => (<article key={b.name} className="card"><h3>{b.name}</h3><p className="price">{b.price}<small> / box</small></p><p>{b.items}</p></article>))}
+        <span className="eyebrow">For days worth sharing</span>
+        <h1>Good gatherings deserve good food.</h1>
+        <p>Explore individual meal box options for workdays, celebrations and family occasions. Tell us your needs and we'll discuss the details.</p>
+        <div className="row">
+          <a className="btn" href={wa("Hi, I would like a quote for meal boxes. Event date: , Quantity: , Delivery area: ")}>Ask for a quote ↗</a>
+          <a className="btn ghost" href="#box-options">Browse boxes ↓</a>
         </div>
-        <p className="muted">Veg and Jain options available. Cutlery and napkins included.</p>
       </section>
-      <section className="sec tint">
-        <h2>How it works</h2>
-        <ol className="steps">
-          <li>Message us the date, number of boxes and delivery area.</li>
-          <li>We confirm the menu and price.</li>
-          <li>Pay by UPI to book your slot.</li>
-          <li>We deliver sealed boxes on time.</li>
-        </ol>
+      <section className="sec" id="box-options">
+        <div className="section-heading">
+          <span className="kicker">Made for sharing</span>
+          <h2>Find the right meal box.</h2>
+          <p>Compare the menu options below. Prices and availability are confirmed when you order.</p>
+        </div>
+        <div className="grid">
+          {BOXES.map((box, i) => (
+            <article className="card pricing-card" key={box.name}>
+              <span className="card-icon" aria-hidden="true">{i === 0 ? "🍱" : i === 1 ? "🥘" : "✨"}</span>
+              <h3>{box.name}</h3>
+              <p className="price">{box.price}<small> / box</small></p>
+              <p>{box.items}</p>
+              <a className="btn sm" href={wa("Hi, I'm interested in " + box.name + " for a group order. Date: , Quantity: , Area: ")}>Enquire about this box ↗</a>
+            </article>
+          ))}
+        </div>
+      </section>
+      <section className="section-band">
+        <div className="section-shell">
+          <div className="section-heading">
+            <span className="kicker">Easy from the start</span>
+            <h2>How a bulk enquiry works.</h2>
+            <p>We keep the first step simple so you can plan your event with clarity.</p>
+          </div>
+          <div className="steps-grid">
+            <article className="step-card"><span className="step-number">01</span><h3>Share the occasion</h3><p>Tell us the date, location and number of meal boxes.</p></article>
+            <article className="step-card"><span className="step-number">02</span><h3>Discuss the menu</h3><p>Ask about box options, dietary preferences and availability.</p></article>
+            <article className="step-card"><span className="step-number">03</span><h3>Confirm your order</h3><p>Agree on the menu, pricing and delivery details together.</p></article>
+          </div>
+        </div>
+      </section>
+      <section className="bottom-cta">
+        <div><span className="kicker" style={{ color: "var(--turmeric)" }}>Planning something special?</span><h2>Let's talk about your event.</h2><p>Share the details and we'll help you explore your options.</p></div>
+        <a className="btn light" href={wa("Hi, I'd like to discuss a bulk food order")}>Message us ↗</a>
       </section>
     </main>
   );

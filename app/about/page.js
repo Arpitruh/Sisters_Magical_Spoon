@@ -1,4 +1,4 @@
-import Image from "next/image";
+import PhotoGallery from "../../components/PhotoGallery";
 import { SITE } from "../../lib/site";
 
 export const metadata = {
@@ -21,19 +21,34 @@ const PHOTOS = [
   { src: "/photos/packing.jpg", alt: "Meals being packed in sealed containers" },
 ];
 
+
 export default function About() {
   return (
     <main>
-      <section className="hero"><h1>About our kitchen</h1><p>{SITE.tagline}.</p></section>
-      <section className="sec"><h2>Our story</h2><p>{STORY}</p></section>
-      <section className="sec tint">
-        <h2>How we keep it clean</h2>
-        <ul>{HYGIENE.map((h) => (<li key={h}>{h}</li>))}</ul>
-        {SITE.fssai && <p><strong>FSSAI Lic. No. {SITE.fssai}</strong></p>}
+      <section className="hero">
+        <span className="eyebrow">The people behind the plate</span>
+        <h1>Made with a little extra heart.</h1>
+        <p>{SITE.tagline}.</p>
       </section>
       <section className="sec">
-        <h2>Inside the kitchen</h2>
-        <div className="photos">{PHOTOS.map((p) => (<figure key={p.src}><Image src={p.src} alt={p.alt} width={800} height={600} sizes="(max-width: 700px) 100vw, 400px" /><figcaption>{p.alt}</figcaption></figure>))}</div>
+        <div className="story-card">
+          <span className="kicker">Where it all begins</span>
+          <h2>Our story</h2>
+          <p>{STORY}</p>
+        </div>
+      </section>
+      <section className="sec tint">
+        <div className="section-heading">
+          <span className="kicker">Behind the scenes</span>
+          <h2>The details that matter.</h2>
+          <p>The following kitchen practices are draft content and should be confirmed before a customer launch.</p>
+        </div>
+        <ul className="hygiene-list">{HYGIENE.map((item) => <li key={item}>{item}</li>)}</ul>
+        {SITE.fssai && <p><strong>FSSAI Licence: {SITE.fssai}</strong></p>}
+      </section>
+      <section className="sec">
+        <div className="section-heading"><span className="kicker">Inside the kitchen</span><h2>Take a look around.</h2><p>More real kitchen photographs will be added soon.</p></div>
+        <PhotoGallery photos={PHOTOS} />
       </section>
     </main>
   );

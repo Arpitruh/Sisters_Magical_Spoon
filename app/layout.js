@@ -3,8 +3,9 @@ import Link from "next/link";
 import { Baloo_2, DM_Sans } from "next/font/google";
 import Script from "next/script";
 import Logo from "../components/Logo";
+import SiteNavigation from "../components/SiteNavigation";
 import TrackWA from "../components/TrackWA";
-import { SITE, wa, OCCASIONS } from "../lib/site";
+import { SITE, wa } from "../lib/site";
 import { getContent } from "../lib/content";
 
 export const revalidate = 3600; // lets date-based notices switch on and off within an hour
@@ -49,26 +50,52 @@ export default async function RootLayout({ children }) {
         <TrackWA />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
         {showNotice && <div className="notice" role="status">{NOTICE.text}</div>}
+        <a className="skip-link" href="#main-content">Skip to content</a>
+        <div className="announcement">Home-style tiffins • Meal boxes for every occasion</div>
         <header className="top">
-          <Link className="brand" href="/"><Logo />{SITE.name}</Link>
-          <nav>
-            <Link href="/#menu">Menu</Link>
-            <Link href="/#plans">Plans</Link>
-            <Link href="/bulk-meal-boxes">Bulk boxes</Link>
-            <Link href="/about">About</Link>
-            <Link href="/gallery">Gallery</Link>
-            <Link href="/blog">Blog</Link>
-            <Link href="/#faq">FAQ</Link>
-          </nav>
+          <div className="header-inner">
+            <Link className="brand" href="/" aria-label="Sister’s Magical Spoon homepage">
+              <span className="brand-mark"><Logo /></span>
+              <span>{SITE.name}</span>
+            </Link>
+            <SiteNavigation orderUrl={wa("Hi, I’d like to enquire about your tiffin service")} />
+          </div>
         </header>
+        <div id="main-content" tabIndex={-1} />
         {children}
         <footer className="foot">
-          <p><strong>{SITE.name}</strong> · {SITE.address}, {SITE.city} · {SITE.phoneDisplay}</p>
-          {SITE.fssai && <p>FSSAI Lic. No. {SITE.fssai}</p>}
-          <p>{SITE.areas.map((a, i) => (<span key={a.slug}>{i > 0 && ", "}<Link href={`/areas/${a.slug}`}>Tiffin in {a.name}</Link></span>))}</p>
-          <p>{OCCASIONS.map((o, i) => (<span key={o.slug}>{i > 0 && ", "}<Link href={`/occasions/${o.slug}`}>{o.title}</Link></span>))}</p>
+          <div className="footer-inner">
+            <div className="footer-grid">
+              <div className="footer-brand">
+                <Link className="footer-title" href="/">{SITE.name}</Link>
+                <p className="footer-about">{SITE.tagline}. Explore tiffin plans, weekly menus and packed meal boxes for special occasions.</p>
+                {SITE.fssai && <p className="footer-about">FSSAI Licence: {SITE.fssai}</p>}
+              </div>
+              <div className="footer-col">
+                <h3>Explore</h3>
+                <Link href="/#menu">Weekly menu</Link>
+                <Link href="/#plans">Tiffin plans</Link>
+                <Link href="/bulk-meal-boxes">Bulk meal boxes</Link>
+                <Link href="/gallery">Food gallery</Link>
+                <Link href="/about">Our story</Link>
+              </div>
+              <div className="footer-col">
+                <h3>Get in touch</h3>
+                <a href={wa("Hi, I have a question about your meals")} target="_blank" rel="noopener noreferrer">Chat on WhatsApp ↗</a>
+                {SITE.address !== "Your kitchen address" && <span>{SITE.address}</span>}
+                {SITE.city !== "Your City" && <span>{SITE.city}</span>}
+                <Link href="/blog">From our blog</Link>
+              </div>
+            </div>
+            <div className="footer-bottom">
+              <span>© {new Date().getFullYear()} {SITE.name}. Made with care.</span>
+              <span>Home-style meals and thoughtful moments.</span>
+            </div>
+          </div>
         </footer>
-        <a className="wa" href={wa("Hi, I want to order from Sister’s Magical Spoon")}>Order on WhatsApp</a>
+        <a className="wa" href={wa("Hi, I want to order from Sister’s Magical Spoon")} target="_blank" rel="noopener noreferrer">
+          <span aria-hidden="true">✳</span> WhatsApp us <span aria-hidden="true">↗</span>
+        </a>
       </body>
     </html>
   );
