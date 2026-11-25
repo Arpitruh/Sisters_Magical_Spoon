@@ -1,4 +1,8 @@
 # Sister’s Magical Spoon
+
+Website for a food business, with editable menus, locality pages, gallery photos and a small admin panel.
+
+## Getting started
 1. `npm install` then `npm run dev`
 2. Edit `lib/site.js` (name, city, areas, phone, prices, menu). Add one object to `areas` per locality: pages and sitemap update automatically.
 3. Set `SITE.url` to your real domain, deploy on Vercel, submit `/sitemap.xml` in Google Search Console.
